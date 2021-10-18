@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{%block content %}
+    <h3>Past Reviews</h3>
+    {% for entry in entries %}
+        <p class=review>
+            Course: {{ entry.name }}&#9{{ entry.number }}&#9{{ entry.dept}} 
+            <br>Term: {{ entry.quarter }}&#9{{ entry.year }}
+            <br>Instructor: {{ entry.instructor}}
+	    <br>Rating: {% for i in range(entry.rating) %}&#9733{% endfor %}<br>
+	    Review: <br>{{ entry.review }}
+        </p>
+    {% endfor %}
+    <br>
+    <a href="{{ url_for('index')}}">
+        <button class=return>Home</button>
+    </a>
+{% endblock %}

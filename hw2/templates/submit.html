@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Submit New Review</h2>
+    <form action="{{ url_for('submit') }}" method=post>
+	<p class="heading">Course Name: <input type=text name=name>
+	<p class="heading">Course Number: <input type=text name=number>
+    <p class="heading">Department <input type=text name=dept>
+    <p class="heading">Quarter <input type=text name=quarter>
+    <p class="heading">Year <input type=text name=year>
+    <p class="heading">Instructor <input type=text name=instructor>
+    <p class="heading">Rating
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                1<input type="radio" name="rating" value="1" autocomplete="off">
+            </label>
+            <label class="btn btn-secondary">
+                2<input type="radio" name="rating" value="2" autocomplete="off">
+            </label>
+            <label class="btn btn-secondary">
+                3<input type="radio" name="rating" value="3" autocomplete="off">
+            </label>
+            <label class="btn btn-secondary">
+                4<input type="radio" name="rating" value="4" autocomplete="off">
+            </label>
+            <label class="btn btn-secondary">
+               5<input type="radio" name="rating" value="5" autocomplete="off">
+            </label>
+            </div>
+    </p>
+    <p class="heading">Review:
+	<textarea rows=5 cols=50 name=review></textarea></p>
+	<p><input type=submit value='Submit Review'></p>
+    </form>
+    <a href="{{ url_for('index')}}">
+        <button class=return>Home</button>
+    </a>
+{% endblock %}
