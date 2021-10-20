@@ -22,6 +22,21 @@ class Model():
         """
         pass
 
-    # def update(self, )
+    def update(self, id, name, number, dept, rating, quarter, year, instructor, review):
+        """
+        Updates existing entry in database, based on entry id.
+        :param id: Integer
+        :param name: String
+        :param number: String
+        :param dept: String
+        :param rating: Integer
+        :param quarter: String
+        :param year: Integer
+        :param instructor: String
+        :param review: String
+        :return: none
+        :raises: Database errors on connection and insertion
+        """
+        pass
 
     

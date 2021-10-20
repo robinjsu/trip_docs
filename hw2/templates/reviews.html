@@ -9,7 +9,9 @@
 	    <br>Rating: {% for i in range(entry.rating) %}&#9733{% endfor %}<br>
 	    Review: <br>{{ entry.review }}
         </p>
-        <a href="{{ url_for('update') }}"
+        <a href="{{ url_for('update', entry=loop.index) }}">
+            <button class=update>Update</button>
+        </a>
     {% endfor %}
     <br>
     <a href="{{ url_for('index') }}">

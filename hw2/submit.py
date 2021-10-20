@@ -13,8 +13,7 @@ class Submit(MethodView):
         """
         rating_number = int(request.form['rating'])
         assert (rating_number >= 0 and rating_number <=5), f"Ratings error: {request.form['rating']}"
-
-        assert type(request.form['year']) == int
+        # assert type(int(request.form['year'])) == int
 
         model = review_model.get_model()
         model.insert(request.form['name'], request.form['number'], request.form['dept'], 

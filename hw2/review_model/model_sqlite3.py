@@ -47,8 +47,8 @@ class model(Model):
         """
         connection = sqlite3.connect(DB_FILE)
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM reviews where rowid=id VALUES(:id)", id)
-        return cursor.fetchall()
+        cursor.execute("SELECT * FROM reviews where rowid=:id", id)
+        return (cursor.fetchall())[0]
 
     def insert(self, name, number, dept, quarter, year, instructor, rating, review):
         """
@@ -70,6 +70,34 @@ class model(Model):
         cursor.execute('''insert into reviews (
                     name, number, dept, quarter, year, instructor, rating, review) 
                     VALUES (:name, :number, :dept, :quarter, :year, :instructor, :rating, :review)''', 
+                    params)
+
+        connection.commit()
+        cursor.close()
+        return True
+
+    def update(self, id, name, number, dept, quarter, year, instructor, rating, review):
+        """
+        Updates existing entry in database, based on entry id.
+        :param name: String
+        :param number: String
+        :param dept: String
+        :param rating: Integer
+        :param quarter: String
+        :param year: Integer
+        :param instructor: String
+        :param review: String
+        :return: none
+        :raises: Database errors on connection and insertion
+        """
+        params = {'name':name, 'number':number, 'dept':dept, 'quarter':quarter, 'year':year, 'instructor': instructor, 'rating':rating, 'review':review, 'id': str(id)}
+        connection = sqlite3.connect(DB_FILE)
+        cursor = connection.cursor()
+        cursor.execute('''UPDATE reviews 
+                          SET (
+                            name=:name, number=:number, dept=:dept, quarter=:quarter, year=:year, instructor=:instructor, 
+                            rating=:rating, review=:review) 
+                        WHERE rowid=:id;''',
                     params)
 
         connection.commit()
