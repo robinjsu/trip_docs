@@ -11,11 +11,15 @@ form       { margin:.1em auto; padding:.1em; width: 400px; border: 1px }
 .entry     { margin-bottom: 2em; padding-bottom: 2em; border-bottom: 1px solid #888; }
 input[type=text] { margin: .5em 0; padding: .5em; font-size: 12px; color: #777; width: 200px;}
 input[type=textarea] { margin: .5em 0; padding: .5em; font-size: 12px; color: #777; width: 200px;}
-h3         { text-align: center;}
+h3, h4         { text-align: center;}
 button      { border-width: 2px; 
               border-style: solid;
               border-color: darkblue; 
               border-radius: 5%; 
               font-family: "Gill Sans", sans-serif;
+              padding: 2px;
+              padding-left: 4px;
+              padding-right: 4px;
             }
-#submit-btn { text-align: center;}
+#submit-btn { text-align: center; margin-top: 5px;}
+#read        { margin-bottom: 0px;}
