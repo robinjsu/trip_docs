@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="landing">
-    <h2>Welcome to my Course Review Website</h2>
-
-    <h3>Submit A New Review --> 
+    <h2>Welcome to my Course Review Website!</h2>
+    <br>
+    <h3>Submit A New Review 
         <a href="{{ url_for('submit') }}">
-            <button>GO</button>
+            <button>&#10148</button>
         </a>
     </h3>
     <h3>Read Past Reviews</h3>
-    <div>
+    <div id="submit-btn">
         <a href="{{ url_for('reviews')}}">
             <button class="btn lg" >CLICK HERE</button>
         </a> 

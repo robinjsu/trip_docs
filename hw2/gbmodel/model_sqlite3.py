@@ -17,7 +17,15 @@ class model(Model):
         try:
             cursor.execute("select count(rowid) from reviews")
         except sqlite3.OperationalError:
-            cursor.execute("create table reviews (name, number, dept, quarter, year, instructor, rating, review)")
+            cursor.execute('''create table reviews (
+                                name,
+                                number, 
+                                dept, 
+                                quarter, 
+                                year, 
+                                instructor, 
+                                rating, 
+                                review)''')
         cursor.close()
 
     def select(self):
@@ -28,6 +36,8 @@ class model(Model):
         """
         connection = sqlite3.connect(DB_FILE)
         cursor = connection.cursor()
+        cursor.execute('select rowid from reviews')
+        print(cursor.fetchall())
         cursor.execute("SELECT * FROM reviews")
         return cursor.fetchall()
 
@@ -48,7 +58,10 @@ class model(Model):
         params = {'name':name, 'number':number, 'dept':dept, 'quarter':quarter, 'year':year, 'instructor': instructor, 'rating':rating, 'review':review}
         connection = sqlite3.connect(DB_FILE)
         cursor = connection.cursor()
-        cursor.execute("insert into reviews (name, number, dept, quarter, year, instructor, rating, review) VALUES (:name, :number, :dept, :quarter, :year, :instructor, :rating, :review)", params)
+        cursor.execute('''insert into reviews (
+                    name, number, dept, quarter, year, instructor, rating, review) 
+                    VALUES (:name, :number, :dept, :quarter, :year, :instructor, :rating, :review)''', 
+                    params)
 
         connection.commit()
         cursor.close()
