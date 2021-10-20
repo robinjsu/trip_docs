@@ -2,7 +2,7 @@
 {%block content %}
     <h3>Past Reviews</h3>
     {% for entry in entries %}
-        <p class=review>
+        <p class="review">
             Course: {{ entry.name }}&#9{{ entry.number }}&#9{{ entry.dept}} 
             <br>Term: {{ entry.quarter }}&#9{{ entry.year }}
             <br>Instructor: {{ entry.instructor}}
@@ -11,7 +11,7 @@
         </p>
     {% endfor %}
     <br>
-    <a href="{{ url_for('index')}}">
+    <a href="{{ url_for('index') }}">
         <button class=return>Home</button>
     </a>
 {% endblock %}

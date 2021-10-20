@@ -1,6 +1,6 @@
 from flask import redirect, request, url_for, render_template
 from flask.views import MethodView
-import gbmodel
+import review_model
 
 class Submit(MethodView):
     def get(self):
@@ -16,7 +16,7 @@ class Submit(MethodView):
 
         assert type(request.form['year']) == int
 
-        model = gbmodel.get_model()
+        model = review_model.get_model()
         model.insert(request.form['name'], request.form['number'], request.form['dept'], 
             request.form['quarter'], request.form['year'], request.form['instructor'], rating_number,
             request.form['review'])
