@@ -36,9 +36,18 @@ class model(Model):
         """
         connection = sqlite3.connect(DB_FILE)
         cursor = connection.cursor()
-        cursor.execute('select rowid from reviews')
-        print(cursor.fetchall())
-        cursor.execute("SELECT * FROM reviews")
+        cursor.execute("select * FROM reviews")
+        return cursor.fetchall()
+
+    def select_one(self, id):
+        """
+        Retrieves a single entry in the database, based on the row id
+        :param id: Integer
+        :return: All columns from a single database entry
+        """
+        connection = sqlite3.connect(DB_FILE)
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM reviews where rowid=id VALUES(:id)", id)
         return cursor.fetchall()
 
     def insert(self, name, number, dept, quarter, year, instructor, rating, review):
