@@ -16,15 +16,18 @@ class Update(MethodView):
         entry = {'name':review[0], 'number':review[1], 'dept':review[2], 'quarter':review[3], 'year':review[4], 
             'instructor':review[5], 'rating':review[6], 'review':review[7]}
              
-        return render_template('update.html', entry=entry)
+        return render_template('update.html', entry=entry, id=id)
 
     def post(self):
+        """
+        Take form data from updated review entry and send command to update the entry in the database
+        """
         rating_number = int(request.form['rating'])
         assert (rating_number >= 0 and rating_number <=5), f"Ratings error: {request.form['rating']}"
-        # assert type(request.form['year']) == int
+        # assert request.content_length < int.__sizeof__
+        id = request.referrer[-1]
+        print(f"id: {id}")
 
         model = review_model.get_model() 
-        model.update(id, request.form['name'], request.form['number'], request.form['dept'], 
-            request.form['quarter'], request.form['year'], request.form['instructor'], rating_number,
-            request.form['review'])
+        model.update(id, request.form['name'], request.form['number'], request.form['dept'], request.form['quarter'], request.form['year'], request.form['instructor'], rating_number, request.form['review'])
         return redirect(url_for('index'))

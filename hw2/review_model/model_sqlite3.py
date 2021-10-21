@@ -90,15 +90,12 @@ class model(Model):
         :return: none
         :raises: Database errors on connection and insertion
         """
-        params = {'name':name, 'number':number, 'dept':dept, 'quarter':quarter, 'year':year, 'instructor': instructor, 'rating':rating, 'review':review, 'id': str(id)}
+        params = {'name':name, 'number':number, 'dept':dept, 'quarter':quarter, 'year':year, 'instructor': instructor, 'rating': rating, 'review':review, 'id': id}
         connection = sqlite3.connect(DB_FILE)
         cursor = connection.cursor()
         cursor.execute('''UPDATE reviews 
-                          SET (
-                            name=:name, number=:number, dept=:dept, quarter=:quarter, year=:year, instructor=:instructor, 
-                            rating=:rating, review=:review) 
-                        WHERE rowid=:id;''',
-                    params)
+                          SET (name = :name, number = :number, dept = :dept, quarter = :quarter, year = :year, instructor = :instructor, rating = :rating, review = :review) 
+                          WHERE rowid = :id''', params)
 
         connection.commit()
         cursor.close()
