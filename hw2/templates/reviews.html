@@ -3,8 +3,8 @@
     <h3>Past Reviews</h3>
     {% for entry in entries %}
         <p class="review">
-            Course: {{ entry.name }}&#9{{ entry.number }}&#9{{ entry.dept}} 
-            <br>Term: {{ entry.quarter }}&#9{{ entry.year }}
+            Course: {{ entry.name }}<br>Course Number: {{ entry.number }}<br>Department: {{ entry.dept}} 
+            <br>Term: {{ entry.quarter }} {{ entry.year }}
             <br>Instructor: {{ entry.instructor}}
 	    <br>Rating: {% for i in range(entry.rating) %}&#9733{% endfor %}<br>
 	    Review: <br>{{ entry.review }}
