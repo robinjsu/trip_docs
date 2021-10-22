@@ -20,13 +20,14 @@ class Update(MethodView):
 
     def post(self):
         """
-        Take form data from updated review entry and send command to update the entry in the database
+        Take form data from updated review entry and send update query to edit entry in the database.
+        Redirects to the landing page.
         """
         rating_number = int(request.form['rating'])
         assert (rating_number >= 0 and rating_number <=5), f"Ratings error: {request.form['rating']}"
-        # assert request.content_length < int.__sizeof__
+
+        # get correct id of entry by using url query from the referer url (the last character)
         id = request.referrer[-1]
-        print(f"id: {id}")
 
         model = review_model.get_model() 
         model.update(id, request.form['name'], request.form['number'], request.form['dept'], request.form['quarter'], request.form['year'], request.form['instructor'], rating_number, request.form['review'])

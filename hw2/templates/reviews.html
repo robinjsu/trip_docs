@@ -7,13 +7,14 @@
             <br>Term: {{ entry.quarter }} {{ entry.year }}
             <br>Instructor: {{ entry.instructor}}
 	    <br>Rating: {% for i in range(entry.rating) %}&#9733{% endfor %}<br>
-	    Review: <br>{{ entry.review }}
+	    Comments: {{ entry.review }}
         </p>
         <a href="{{ url_for('update', entry=loop.index) }}">
-            <button class=update>Update</button>
+            <button class=update>Update Review</button>
         </a>
     {% endfor %}
     <br>
+    <br><br>
     <a href="{{ url_for('index') }}">
         <button class=return>Home</button>
     </a>

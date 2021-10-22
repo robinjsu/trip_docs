@@ -25,9 +25,7 @@ app.add_url_rule('/reviews',
 
 app.add_url_rule('/update', 
                   view_func=Update.as_view('update'),
-                  methods=['GET', 'POST'],
-                  
-                  )
+                  methods=['GET', 'POST'])
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

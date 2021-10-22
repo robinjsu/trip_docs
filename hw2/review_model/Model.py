@@ -6,6 +6,13 @@ class Model():
         """
         pass
 
+    def select_one(self, id):
+        """
+        Retrieve a single database entry, based on rowid
+        :param id: Integer
+        """
+        pass
+
     def insert(self, name, number, dept, rating, quarter, year, instructor, review):
         """
         Inserts entry into database
