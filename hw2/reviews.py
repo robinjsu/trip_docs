@@ -4,6 +4,13 @@ import review_model
 
 class Reviews(MethodView):
     def get(self):
+<<<<<<< HEAD
+=======
+        """
+        Render the page with list of previously entered course reviews.
+        This page renders database entries, as well as options to update existing entries.
+        """
+>>>>>>> update
         model = review_model.get_model()
         
         entries = [dict(name=row[0], number=row[1], dept=row[2], quarter=row[3], year=row[4], 
@@ -12,4 +19,4 @@ class Reviews(MethodView):
         for e in entries:
             e['rating'] = int(e['rating'])
              
-        return render_template('reviews.html',entries=entries)
+        return render_template('reviews.html', entries=entries)

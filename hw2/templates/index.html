@@ -2,19 +2,17 @@
 {% block content %}
 <div class="landing">
     <h2>Welcome to my Course Review Website!</h2>
-    <br>
     <h3>Submit A New Review 
         <a href="{{ url_for('submit') }}">
             <button>&#10148</button>
         </a>
     </h3>
-    <h3>Read Past Reviews</h3>
-    <div id="submit-btn">
+    <h4 id="read">Read Past Reviews</h4>
+    <p id="submit-btn">
         <a href="{{ url_for('reviews')}}">
             <button class="btn lg" >CLICK HERE</button>
         </a> 
-    </div>
+    </p>
     
 </div>
-
 {% endblock %}

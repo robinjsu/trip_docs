@@ -3,14 +3,26 @@
     <h3>Past Reviews</h3>
     {% for entry in entries %}
         <p class="review">
+<<<<<<< HEAD
             Course: {{ entry.name }}&#9{{ entry.number }}&#9{{ entry.dept}} 
             <br>Term: {{ entry.quarter }}&#9{{ entry.year }}
+=======
+            Course: {{ entry.name }}<br>Course Number: {{ entry.number }}<br>Department: {{ entry.dept}} 
+            <br>Term: {{ entry.quarter }} {{ entry.year }}
+>>>>>>> update
             <br>Instructor: {{ entry.instructor}}
 	    <br>Rating: {% for i in range(entry.rating) %}&#9733{% endfor %}<br>
-	    Review: <br>{{ entry.review }}
+	    Comments: {{ entry.review }}
         </p>
+        <a href="{{ url_for('update', entry=loop.index) }}">
+            <button class=update>Update Review</button>
+        </a>
     {% endfor %}
     <br>
+<<<<<<< HEAD
+=======
+    <br><br>
+>>>>>>> update
     <a href="{{ url_for('index') }}">
         <button class=return>Home</button>
     </a>
