@@ -1,0 +1,18 @@
+# Use Ubuntu 20.04 as the base image
+FROM ubuntu:18.04
+
+# Specify your email address as the maintainer of the container image
+LABEL "author"="robisu@pdx.edu"
+
+# Execute apt get update, install Python's package manager in container (pip)
+RUN apt-get update -y && apt-get install -y python-pip
+
+COPY ./hw2 /app
+
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+
+ENTRYPOINT ["python"]
+
+CMD ["app.py"]

@@ -1,0 +1,14 @@
+FROM alpine:latest
+
+LABEL "author"="robisu@pdx.edu"
+
+COPY ./hw2 /app
+
+WORKDIR /app
+
+# Install python, pip, any packages in requirements.txt, uninstall pip, remove unnecessary directories
+RUN apk update && apk add python3 && apk add py3-pip && pip install -r requirements.txt && apk del py3-pip && rm -rf /media /tmp /opt /home /var /mnt /run
+
+ENTRYPOINT ["python3"]
+
+CMD ["app.py"]
