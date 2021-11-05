@@ -10,7 +10,8 @@ class Update(MethodView):
         """
         model = review_model.get_model()
 
-        id = request.args.get('entry')
+        id = request.args.get('id')
+        print(f"GET ID: {id}")
         review = model.select_one(id)
         
         entry = {'name':review[0], 'number':review[1], 'dept':review[2], 'quarter':review[3], 'year':review[4], 
@@ -26,8 +27,8 @@ class Update(MethodView):
         rating_number = int(request.form['rating'])
 
         # get correct id of entry by using url query from the referer url (the last character)
-        id = request.referrer[-1]
-
+        id = request.args.get('id')
+        print(f"ID: {id}")
         model = review_model.get_model() 
         model.update(id, request.form['name'], request.form['number'], request.form['dept'], request.form['quarter'], request.form['year'], request.form['instructor'], rating_number, request.form['review'])
         return redirect(url_for('index'))
