@@ -2,10 +2,11 @@ from .Model import Model
 from google.cloud import datastore
 
 KIND = 'CourseReview'
+PROJECT = 'cloud-f21-robin-su-robisu'
 
 class model(Model):
     def __init__(self):
-        self.client = datastore.Client('cloud-f21-robin-su-robisu')
+        self.client = datastore.Client(PROJECT)
 
     def select(self):
         query_kind = self.client.query(kind=KIND)
@@ -17,11 +18,10 @@ class model(Model):
     
         return entries
         
-    def select_one(self, id):        
-        key = self.client.key(KIND, id)
-        # item = datastore.Entity(key)
+    def select_one(self, id):      
+        key =self.client.key(KIND, int(id))
         review = self.client.get(key)
-        print(f"RETURN FROM DATASTORE: {review}")
+
         entry = [review['name'], review['number'], review['dept'], review['quarter'], review['year'], review['instructor'], review['rating'], review['review'], review.key.id]
 
         return entry
@@ -48,8 +48,8 @@ class model(Model):
         
 
     def update(self, id, name, number, dept, quarter, year, instructor, rating, review):
-        key = self.client.key(KIND, id)
-        entity = self.client.key(key)
+        key = self.client.key(KIND, int(id))
+        entity = datastore.Entity(key)
         entity.update(
             {
                 'name': name,
@@ -66,11 +66,3 @@ class model(Model):
         self.client.put(entity)
 
         return True
-
-        pass
-
-
-# methods from the datastore client class:
-# get(key)
-# put(entity)
-# query(kind)cd ..

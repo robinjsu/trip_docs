@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <h2>Update Review</h2>
-    <form action="{{ url_for('update'), id=entry.id }}" method=post>
+    <form action="{{ url_for('update', id=entry.id) }}" method=post>
 	<p class="heading">Course Name: <input type=text value="{{ entry.name }}" name=name></p>
 	<p class="heading">Course Number: <input type=text value="{{ entry.number }}"name=number></p>
     <p class="heading">Department <input type=text value="{{ entry.dept }}" name=dept></p>
@@ -19,30 +19,30 @@
             </label>
             <label class="btn btn-secondary">
             {% if entry.rating == 2 %}
-                2<input type="radio" name="rating" value="1" autocomplete="off" checked>
+                2<input type="radio" name="rating" value="2" autocomplete="off" checked>
             {% else %}
-                2<input type="radio" name="rating" value="1" autocomplete="off">
+                2<input type="radio" name="rating" value="2" autocomplete="off">
             {% endif %}
             </label>
             <label class="btn btn-secondary">
             {% if entry.rating == 3 %}
-                3<input type="radio" name="rating" value="1" autocomplete="off" checked>
+                3<input type="radio" name="rating" value="3" autocomplete="off" checked>
             {% else %}
-                3<input type="radio" name="rating" value="1" autocomplete="off">
+                3<input type="radio" name="rating" value="3" autocomplete="off">
             {% endif %}
             </label>
             <label class="btn btn-secondary">
             {% if entry.rating == 4 %}
-                4<input type="radio" name="rating" value="1" autocomplete="off" checked>
+                4<input type="radio" name="rating" value="4" autocomplete="off" checked>
             {% else %}
-                4<input type="radio" name="rating" value="1" autocomplete="off">
+                4<input type="radio" name="rating" value="4" autocomplete="off">
             {% endif %}
             </label>
             <label class="btn btn-secondary">
             {% if entry.rating == 5 %}
-                5<input type="radio" name="rating" value="1" autocomplete="off" checked>
+                5<input type="radio" name="rating" value="5" autocomplete="off" checked>
             {% else %}
-                5<input type="radio" name="rating" value="1" autocomplete="off">
+                5<input type="radio" name="rating" value="5" autocomplete="off">
             {% endif %}
             </label>
             </div>

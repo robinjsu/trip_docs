@@ -11,13 +11,12 @@ class Update(MethodView):
         model = review_model.get_model()
 
         id = request.args.get('id')
-        print(f"GET ID: {id}")
         review = model.select_one(id)
-        
+        print(f"UPDATE review: {review}")
         entry = {'name':review[0], 'number':review[1], 'dept':review[2], 'quarter':review[3], 'year':review[4], 
-            'instructor':review[5], 'rating':review[6], 'review':review[7]}
+            'instructor':review[5], 'rating':review[6], 'review':review[7], 'id':id}
              
-        return render_template('update.html', entry=entry, id=id)
+        return render_template('update.html', entry=entry)
 
     def post(self):
         """
@@ -25,7 +24,7 @@ class Update(MethodView):
         Redirects to the landing page.
         """
         rating_number = int(request.form['rating'])
-
+        
         # get correct id of entry by using url query from the referer url (the last character)
         id = request.args.get('id')
         print(f"ID: {id}")
