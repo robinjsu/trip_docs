@@ -24,7 +24,6 @@ class Update(MethodView):
         Redirects to the landing page.
         """
         rating_number = int(request.form['rating'])
-        assert (rating_number >= 0 and rating_number <=5), f"Ratings error: {request.form['rating']}"
 
         # get correct id of entry by using url query from the referer url (the last character)
         id = request.referrer[-1]

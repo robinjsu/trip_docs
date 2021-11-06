@@ -15,7 +15,6 @@ class Submit(MethodView):
         Redirect to index when completed.
         """
         rating_number = int(request.form['rating'])
-        assert (rating_number >= 0 and rating_number <=5), f"Ratings error: {request.form['rating']}"
         
         model = review_model.get_model()
         model.insert(request.form['name'], request.form['number'], request.form['dept'], 
