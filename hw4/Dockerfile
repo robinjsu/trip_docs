@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM google/cloud-sdk
 
 LABEL "author"="robisu@pdx.edu"
 
@@ -6,9 +6,6 @@ COPY ./app_files /app
 
 WORKDIR /app
 
-# Install python, pip, any packages in requirements.txt, uninstall pip, remove unnecessary directories
-RUN apk update && apk add python3 && apk add py3-pip && pip install -r requirements.txt && apk del py3-pip && rm -rf /media /tmp /opt /home /var /mnt /run
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && apt update --allow-releaseinfo-change -y && apt install -y python3-pip && pip3 install -r requirements.txt
 
-ENTRYPOINT ["python3"]
-
-CMD ["app.py"]
+CMD exec gunicorn --bind=:$PORT --workers 1 --threads 8 app:app
