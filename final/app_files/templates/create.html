@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if blank == True %}
+        <h2>Enter Trip Details</h2>
+        <form action="{{ url_for('create') }}" method=post>
+            <p class="heading">Trip name: <input type=text name=trip placeholder="New Trip"></p>
+            <p class="heading">Trip Dates:</p> 
+                <div>From: <input type="date" name=start_date></div>
+                <div>To: <input type="date" name=end_date></div>
+            <p class="heading">City: <input type=text name=city required></p>
+            <p class="heading">Country: <input type=text name=country required></p>
+            <p><input type=submit value='Create'></p>
+        </form>
+    {% else %}
+        <h2>{{ info.trip }}</h2>
+        <h3>{{ info.dates }}</h3>
+        <h3>{{ info.city }}, {{ info.country }}</h3>
+        <form action="{{ url_for('create', save=True) }}" method=post>
+            <textarea rows=10 cols=50 placeholder="Enter notes here..."></textarea>
+            <iframe
+                width="450"
+                height="250"
+                frameborder="0" style="border:0"
+                src="{{ map_url }}" allowfullscreen>
+            </iframe>  
+        <p><input type=submit value='Save Document'></p>
+        </form>
+    {% endif %}
+    
+{% endblock %}
