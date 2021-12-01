@@ -8,20 +8,26 @@
                 <div>From: <input type="date" name=start_date></div>
                 <div>To: <input type="date" name=end_date></div>
             <p class="heading">City: <input type=text name=city required></p>
+            <p class="heading">State: <input type=text name=state></p>
             <p class="heading">Country: <input type=text name=country required></p>
             <p><input type=submit value='Create'></p>
         </form>
     {% else %}
-        <h2>{{ info.trip }}</h2>
-        <h3>{{ info.dates }}</h3>
-        <h3>{{ info.city }}, {{ info.country }}</h3>
-        <form action="{{ url_for('create', save=True) }}" method=post>
+        <form action="{{ url_for('create', save=True) }}" method=post></form>
+            <h2>{{ info.trip }}</h2>
+            <h3>{{ info.start_date }} to {{ info.end_date }}</h3>
+            <h3>{{ info.city }}, {{ info.country }}</h3>
             <textarea rows=10 cols=50 placeholder="Enter notes here..."></textarea>
+            {% for item in links %}
+                <h5>{{ item.headline }}</h5>
+                <p>{{ item.abstract }} (published {{ item.pub_date }})</p>
+                <a href="{{ item.url }}">Read Full Article</a>
+            {% endfor %}
             <iframe
                 width="450"
                 height="250"
                 frameborder="0" style="border:0"
-                src="{{ map_url }}" allowfullscreen>
+                src="{{ info.map_url }}" allowfullscreen>
             </iframe>  
         <p><input type=submit value='Save Document'></p>
         </form>
