@@ -1,4 +1,4 @@
-import os, requests as r
+import os
 from datetime import date
 from flask import redirect, request, url_for, render_template
 from flask.views import MethodView
