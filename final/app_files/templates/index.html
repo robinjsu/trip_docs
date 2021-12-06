@@ -1,13 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>Start Here To Create a Trip</h2>
+    <h2>Start Here To Create a New Trip Doc</h2>
     <form action="{{ url_for('index') }}" method=post>
-        <!-- <p class="heading">Trip Name: <input type=text name=trip required></p>
-        <p class="heading">City: <input type=text name=city required></p>
-        <p class="heading">Country: <input type=text name=country required></p>
-        <br><br> -->
         <button class="start" type='submit'>Create New Document</button>
     </form>
+    <div>
+        <h2>Existing Trip Docs</h2>
+        {% for entry in docs %}
+            <p class="existing"><bold>{{ entry.title }}</bold> | {{ entry.start}} - {{ entry.end }}</p>
+            <p class="existing">{{ entry.city }}, {% if entry.state != '' %}{{ entry.state }}, {% endif %}{{ entry.country }}</p>
+            <a href="{{ url_for('update', id=entry.id) }}">
+                <button class=view>View Trip</button>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 

@@ -8,7 +8,10 @@ class Index(MethodView):
         """
         Render the landing page for the site.
         """
-        return render_template('index.html')
+        model = trip_model.get_model()
+        docs = model.select()
+
+        return render_template('index.html', docs=docs)
 
     def post(self):
         '''
