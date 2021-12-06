@@ -18,15 +18,17 @@ class Create(MethodView):
         
         return render_template('create.html', blank=True)
 
-    def post(self, save=False):
+    def post(self):
         '''
         Saves content from page to datastore, 
         user remains on the same page after submitting the content
         '''
         model = trip_model.get_model()
-        if (save == True):
-            pass
-
+        if (bool(request.args.get('save')) == True):
+            notes = request.form['notes']
+            location = request.form['location']
+            print(notes, location)
+            return redirect(url_for('index'))
         else:
             start = date.fromisoformat(request.form['start_date'])
             end = date.fromisoformat(request.form['end_date'])

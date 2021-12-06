@@ -35,3 +35,4 @@ button      { border-width: 2px;
 .notes            { grid-area: notes; }
 .map              { grid-area: map; }
 .articles         { grid-area: articles; }
+.save_info        { visibility: hidden; }

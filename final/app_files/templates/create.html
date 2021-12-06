@@ -13,16 +13,14 @@
             <p><input type=submit value='Create'></p>
         </form>
     {% else %}
-        <h2>{{ info.trip }}</h2>
-        <h3>{{ info.start_date }} to {{ info.end_date }}</h3>
-        <h3>{{ info.city }}, {{ info.country }}</h3>
-        <form action="{{ url_for('create', save=True, info=info) }}" method=post>
+        <form action="{{ url_for('create', save=True) }}" method=post>
+            <h3>{{ info.trip }}</h3>
+            <h2>{{ info.start_date }} to {{ info.end_date }}</h2>
+            <h2>{{ info.city }}, {{ info.country }}</h2>
             <div class="form_body">
                 <div class="notes_header">Notes</div>
-            <div class="map_header">Location Map</div>
-                <div class="notes">
-                    <textarea rows=30 cols=50 placeholder="Enter notes here..."></textarea>
-                </div>
+                <div class="map_header">Location Map</div>
+                    <textarea class="notes" rows=30 cols=50  name=notes placeholder="Enter notes here..."></textarea>
                 <div class="map">
                     <iframe
                         width="400"
@@ -40,6 +38,10 @@
                     {% endfor %}
                 </div>
             </div>
+            <input class="save_info" type=text readonly=readonly name=title  value='{{ info.trip }}'>
+            <input class="save_info" type=text readonly=readonly name=start_date value='{{ info.start_date }}'>
+            <input class="save_info" type=text readonly=readonly name=end_date value='{{ info.end_date }}'>
+            <input class="save_info" type=text readonly=readonly name=location value='{{ info.city }}, {{ info.country }}'>
             <p class="submit"><input type=submit value='Save Document'></p>
         </form>
 
