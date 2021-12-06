@@ -24,7 +24,7 @@ class model(Model):
         query_iter = query_kind.fetch()
         entries = []
         for item in query_iter:
-            entry = [item['name'], item['number'], item['dept'], item['quarter'], item['year'], item['instructor'], item['rating'], item['review'], item.key.id]
+            entry = [item['title'], item['start'], item['end'], item['city'], item['state'], item['country'], item['notes'], item.key.id]
             entries.append(entry)
     
         return entries
@@ -36,32 +36,30 @@ class model(Model):
         """   
         key =self.client.key(KIND, int(id))
         review = self.client.get(key)
-
         entry = [review['name'], review['number'], review['dept'], review['quarter'], review['year'], review['instructor'], review['rating'], review['review'], review.key.id]
 
         return entry
         
 
-    def insert(self, notes, map_url):
+    def insert(self, trip_details):
         """
         Enter new entity into Datastore under the specified KIND
         :params: all fields with the associated course review.
         """
         key = self.client.key(KIND)
-        course = datastore.Entity(key)
-        course.update(
+        trip = datastore.Entity(key)
+        trip.update(
             {
-                'name': name,
-                'number': number,
-                'dept': dept,
-                'quarter': quarter,
-                'year': year,
-                'instructor': instructor,
-                'rating': rating,
-                'review': review
+                'title': trip_details['title'],
+                'start': trip_details['start_date'],
+                'end': trip_details['end_date'],
+                'city': trip_details['city'],
+                'state': trip_details['state'],
+                'country': trip_details['country'],
+                'notes': trip_details['notes'],
             }
         )
-        self.client.put(course)
+        self.client.put(trip)
 
         return True
         
