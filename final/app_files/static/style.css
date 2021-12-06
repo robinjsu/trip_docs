@@ -23,7 +23,7 @@ button      { border-width: 2px;
 #submit-btn { text-align: center; margin-top: 5px;}
 #read        { margin-bottom: 0px;}
 
-/* Create page style elements */
+/* create.html style elements */
 .form_body     { display: grid; grid-template-areas:
                 "notes_header map_header"
                 "notes  map"
