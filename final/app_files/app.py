@@ -10,7 +10,6 @@ from create import Create
 
 app = flask.Flask(__name__)       # our Flask app
 
-
 app.add_url_rule('/',
                  view_func=Index.as_view('index'),
                  methods=['GET', 'POST'])

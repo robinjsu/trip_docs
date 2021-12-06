@@ -36,3 +36,6 @@ button      { border-width: 2px;
 .map              { grid-area: map; }
 .articles         { grid-area: articles; }
 .save_info        { visibility: hidden; }
+
+/* index.html style elements*/
+.existing      { margin: 0;}
