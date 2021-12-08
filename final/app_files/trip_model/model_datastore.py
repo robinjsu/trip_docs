@@ -127,7 +127,7 @@ class model(Model):
         forecast = [] 
         for day in response['daily']:
             timestamp = datetime.fromtimestamp(day['dt'])
-            dt = f'{timestamp.month}-{timestamp.day}'
+            dt = f'{timestamp.month}/{timestamp.day}'
             temp = day['temp']['day']
             desc = day['weather'][0]['description']
             icon = f'https://openweathermap.org/img/wn/{day["weather"][0]["icon"]}.png'
