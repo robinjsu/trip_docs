@@ -1,13 +1,15 @@
 from .Model import Model
 from google.cloud import datastore
 import os
-from datetime import date
+from datetime import date, datetime
 import requests as r
 
 KIND = 'TripDocs'
 PROJECT = 'cloud-f21-robin-su-robisu'
 NYT_KEY = os.environ.get('NYT_KEY')
 NYT_BASE_URL = f'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key={NYT_KEY}'
+WEATHER_KEY = os.environ.get('WEATHER_KEY')
+WEATHER_BASE_URL = f'http://api.openweathermap.org/'
 
 class model(Model):
     def __init__(self):
@@ -36,7 +38,7 @@ class model(Model):
         """   
         key =self.client.key(KIND, int(id))
         item = self.client.get(key)
-        entry = dict(title=item['title'], start=item['start'], end=item['end'], city=item['city'], state=item['state'], country=item['country'], notes=item['notes'], id=item.key.id)
+        entry = dict(title=item['title'], start_date=item['start_date'], end_date=item['end_date'], city=item['city'], state=item['state'], country=item['country'], notes=item['notes'], id=item.key.id)
 
         return entry
         
@@ -86,11 +88,18 @@ class model(Model):
 
         return True
     
-    def get_article_data(self, nyt_data):
-        nyt_url = f'{NYT_BASE_URL}&q={nyt_data["city"]},{nyt_data["state"]},{nyt_data["country"]}&fq=section_name:("Travel") AND glocations.contains:("{nyt_data["city"]}" "{nyt_data["country"]}")'
+    def get_article_data(self, loc_data):
+        nyt_url = f'{NYT_BASE_URL}&q={loc_data["city"]},{loc_data["state"]},{loc_data["country"]}&fq=section_name:("Travel") AND glocations.contains:("{loc_data["city"]}" "{loc_data["country"]}")'
         response = r.get(nyt_url)
         response = response.json()
+        
+        if response['response']['docs'] == []:
+            nyt_url = f'{NYT_BASE_URL}&q={loc_data["country"]}&fq=section_name:("Travel") AND glocations.contains:("{loc_data["country"]}")'
+            response = r.get(nyt_url)
+            response = response.json()
+
         assert response['status'] == 'OK', f'Received a non "OK" response: {response["status"]}'
+
         articles_list = [x for x in response['response']['docs']]
         links = []
         
@@ -102,4 +111,26 @@ class model(Model):
         
         return links
 
+    def get_weather_data(self, loc_data):
+        geocode_url = f'{WEATHER_BASE_URL}geo/1.0/direct?q={loc_data["city"]},{loc_data["country"]}&limit=5&appid={WEATHER_KEY}'
+        loc_resp = r.get(geocode_url)
+        loc_resp = loc_resp.json()
+        assert loc_resp != [], f'Received empty response from OpenWeatherAPI on location data'
+        latitude = loc_resp[0]['lat']
+        longitude = loc_resp[0]['lon']
+
+        weather_url = f'{WEATHER_BASE_URL}data/2.5/onecall?lat={latitude}&lon={longitude}&units=imperial&exclude=current,minutely,hourly,alerts&appid={WEATHER_KEY}'
+        response = r.get(weather_url)
+        response = response.json()
+        assert response != [], f'Received empty response from OpenWeatherAPI on forecast data: {response}'
+
+        forecast = [] 
+        for day in response['daily']:
+            timestamp = datetime.fromtimestamp(day['dt'])
+            dt = f'{timestamp.month}-{timestamp.day}'
+            temp = day['temp']['day']
+            desc = day['weather'][0]['description']
+            icon = f'https://openweathermap.org/img/wn/{day["weather"][0]["icon"]}.png'
+            forecast.append(dict(dt=dt, temp=temp, desc=desc, icon=icon))
         
+        return forecast

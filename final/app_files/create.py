@@ -1,4 +1,4 @@
-import os
+import os, json
 from datetime import date
 from flask import redirect, request, url_for, render_template
 from flask.views import MethodView
@@ -15,8 +15,15 @@ class Create(MethodView):
         :param trip_name: name entered by user on home page
         :param location: location entered by user on home page
         '''
-        
-        return render_template('create.html', blank=True)
+        country_list = []
+        with open('country_codes.txt') as f:
+            country = f.readline()
+            while country != '':
+                split = country.split(',')
+                country_list.append(tuple(split))
+                country = f.readline()
+
+        return render_template('create.html', blank=True, countries=country_list)
 
     def post(self):
         '''
@@ -57,9 +64,11 @@ class Create(MethodView):
                         country=country, 
                         map_url=map_url)
             
-            links = model.get_article_data(dict(city=city, state=state, country=country))
+            loc_data = dict(city=city, state=state, country=country)
+            links = model.get_article_data(loc_data)
+            forecast = model.get_weather_data(loc_data)
         
-        return render_template('create.html', blank=False, info=info, links=links)
+        return render_template('create.html', blank=False, info=info, links=links, forecast=forecast)
         
         
 

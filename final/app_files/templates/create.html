@@ -7,9 +7,16 @@
             <p class="heading">Trip Dates:</p> 
                 <div>From: <input type="date" name=start_date></div>
                 <div>To: <input type="date" name=end_date></div>
-            <p class="heading">City: <input type=text name=city required></p>
-            <p class="heading">State: <input type=text name=state></p>
-            <p class="heading">Country: <input type=text name=country required></p>
+            <p class="heading">City (Required): <input type=text name=city required></p>
+            <p class="heading">State (Optional): <input type=text name=state></p>
+            <p class="heading">Country (Required): 
+                <input type=text name=country list="country_suggestion" required>
+                <datalist id="country_suggestion">
+                    {% for c in countries %}
+                        <option value='{{ c[1] }}'>{{ c[1] }}</option>
+                    {% endfor %}
+                </datalist>
+            </p>
             <p><input type=submit value='Create'></p>
         </form>
     {% else %}
@@ -17,9 +24,22 @@
             <h3>{{ info.trip }}</h3>
             <h2>{{ info.start_date }} to {{ info.end_date }}</h2>
             <h2>{{ info.city }}, {{ info.country }}</h2>
+            <div class="weather">
+                {% for day in forecast %}
+                    <div class="daily_fc">
+                        <h6>Date:{{ day.dt }}</h6>
+                        <h6>Temp: {{ day.temp }}</h6>
+                        <div>
+                            <img class="icon" src="{{ day.icon }}">
+                        </div>
+                        <h6><i>{{ day.desc }}</i></h6>
+                    </div>
+                {% endfor %}
+            </div>
             <div class="form_body">
                 <div class="notes_header">Notes</div>
                 <div class="map_header">Location Map</div>
+                <div class="weather_header">Weather Forecast</div>
                     <textarea class="notes" rows=30 cols=50  name=notes placeholder="Enter notes here..."></textarea>
                 <div class="map">
                     <iframe
@@ -31,11 +51,15 @@
                 </div>
                 <div class="articles">
                     <h4> Travel Articles (from the New York Times)</h4>
-                    {% for item in links %}
-                    <h5>{{ item.headline }}</h5>
-                    <p>{{ item.abstract }} (published {{ item.pub_date }})</p>
-                    <a href="{{ item.url }}" target="_blank">Read Full Article</a>
-                    {% endfor %}
+                    {% if links == [] %}
+                        <h5>Sadly, no articles to display... :(</h5>
+                    {% else %}
+                        {% for item in links %}
+                        <h5>{{ item.headline }}</h5>
+                        <p>{{ item.abstract }} (published {{ item.pub_date }})</p>
+                        <a href="{{ item.url }}" target="_blank">Read Full Article</a>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <input class="save_info" type=text readonly=readonly name=title  value='{{ info.trip }}'>

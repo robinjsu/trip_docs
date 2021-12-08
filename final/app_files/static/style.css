@@ -1,4 +1,4 @@
-body       { font-family: "serif"; font-size: 20px; color: #000b83;}
+body       { font-family: "serif"; font-size: 20px; color: black;}
 a, h1, h2  { color: #030305; text-align: center;}
 .heading  { font-weight: bold; }
 .page      { margin:.1em auto; 
@@ -24,18 +24,37 @@ button      { border-width: 2px;
 #read        { margin-bottom: 0px;}
 
 /* create.html style elements */
-.form_body     { display: grid; grid-template-areas:
+.form_body     { display: grid; 
+                grid-template-areas:
                 "notes_header map_header"
                 "notes  map"
                 "articles articles";
                 grid-template-columns: 1fr 1fr; gap: 1%;
                 width: 95%; border: 1px; }
 .notes_header     { grid-area: notes_header; }
-.map_header       { grid-area: map_header }
+.map_header       { grid-area: map_header; }
 .notes            { grid-area: notes; }
 .map              { grid-area: map; }
 .articles         { grid-area: articles; }
 .save_info        { visibility: hidden; }
+
+.weather        { display: grid; 
+                  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+                  gap: 1%;
+                  width: 100%;
+                  margin-bottom: 5%;
+                }
+.daily_fc      { 
+                 font-size: 1em;
+                 color: #000b83;
+                 border-style : dashed;
+                 border-width: 1px;
+                 border-color: #000b83; }
+.icon           { margin-left: 30%; }
+h6             { margin: 5px;
+                 padding: 0px;
+                 text-align: center; }
+                
 
 /* index.html style elements*/
 .existing      { margin: 0;}

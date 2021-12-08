@@ -1,7 +1,7 @@
 """
 This code has been adapted from https://github.com/wu4f/cs430-src
 """
-import flask, os
+import flask
 from index import Index
 from reviews import Reviews
 from submit import Submit
