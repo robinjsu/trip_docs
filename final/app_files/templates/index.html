@@ -7,10 +7,10 @@
     <div>
         <h2>Existing Trip Docs</h2>
         {% for entry in docs %}
-            <p class="existing"><bold>{{ entry.title }}</bold> | {{ entry.start}} - {{ entry.end }}</p>
+            <p class="existing"><bold>{{ entry.title }}</bold> | {{ entry.start_date}} - {{ entry.end_date }}</p>
             <p class="existing">{{ entry.city }}, {% if entry.state != '' %}{{ entry.state }}, {% endif %}{{ entry.country }}</p>
             <a href="{{ url_for('update', id=entry.id) }}">
-                <button class=view>View Trip</button>
+                <button class=view>View/Update Trip</button>
         {% endfor %}
     </div>
 {% endblock %}

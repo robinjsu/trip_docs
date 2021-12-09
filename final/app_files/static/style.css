@@ -54,7 +54,9 @@ button      { border-width: 2px;
 h6             { margin: 5px;
                  padding: 0px;
                  text-align: center; }
-                
+
+/* update.html style elements */
+.title         { align-content:center; }
 
 /* index.html style elements*/
 .existing      { margin: 0;}
