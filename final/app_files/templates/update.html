@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="{{ url_for('update', id=doc.id) }}" method=post>
+    <div class=title>
+        <input type=text name=title value="{{ doc.title }}">
+    </div>
+    <div>
+        <input type=date name=start_date value="{{ doc.start_date }}" required> to <input type=date name=end_date value="{{ doc.end_date }}" required>
+    </div>
+    <h3>{{ doc.city }}, {{ doc.country }}</h3>
+    <h5 class="weather_header">Current Weather Forecast</h5>
+            <div class="weather">
+                {% for day in forecast %}
+                    <div class="daily_fc">
+                        <h6>Date:{{ day.dt }}</h6>
+                        <h6>Temp: {{ day.temp }}</h6>
+                        <div>
+                            <img class="icon" src="{{ day.icon }}">
+                        </div>
+                        <h6><i>{{ day.desc }}</i></h6>
+                    </div>
+                {% endfor %}
+            </div>
+    <div class="form_body">
+        <div class="notes_header">Notes</div>
+        <div class="map_header">Location Map</div>
+            <textarea class="notes" rows=30 cols=50  name=notes placeholder="Enter notes here...">{{ doc.notes }}</textarea>
+        <div class="map">
+            <iframe
+                width="100%"
+                height="100%"
+                frameborder="0" style="border:0"
+                src="{{ doc.map_url }}" allowfullscreen>
+            </iframe> 
+        </div>
+        <div class="articles">
+            <h4> Travel Articles (from the New York Times)</h4>
+            {% for item in links %}
+            <h5>{{ item.headline }}</h5>
+            <p>{{ item.abstract }} (published {{ item.pub_date }})</p>
+            <a href="{{ item.url }}" target="_blank">Read Full Article</a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- <input class="save_info" type=text readonly=readonly name=title  value="{{ doc.title }}"> -->
+    <input class="save_info" type=text readonly=readonly name=location value="{{ doc.city }},{{ doc.state}},{{ doc.country }}">
+    <p class="submit"><input class='save-btn' type=submit value="Save Document"></p>
+</form>
+	
+    <a href="{{ url_for('index' )}}">
+        <button class=return>Home</button>
+    </a>
+{% endblock %}
