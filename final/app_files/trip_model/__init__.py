@@ -2,7 +2,7 @@ model_backend = 'datastore'
 
 
 if model_backend == 'datastore':
-    from .model_datastore import model
+    from .model_backend import model
 else:
     raise ValueError("No appropriate databackend configured. ")
 
