@@ -2,7 +2,7 @@ class Model():
     def select(self):
         """
         Gets all entries from the database
-        :return: Tuple containing all rows of database
+        :return: list of dictionaries containing all rows of database
         """
         pass
 
@@ -13,36 +13,17 @@ class Model():
         """
         pass
 
-    def insert(self, name, number, dept, rating, quarter, year, instructor, review):
+    def insert(self, trip_details):
         """
         Inserts entry into database
-        :param name: String
-        :param number: String
-        :param dept: String
-        :param rating: Integer
-        :param quarter: String
-        :param year: Integer
-        :param instructor: String
-        :param review: String
-        :return: none
-        :raises: Database errors on connection and insertion
+        :param trip_details: dictionary of trip title, date range, and location information
         """
         pass
 
-    def update(self, id, name, number, dept, rating, quarter, year, instructor, review):
+    def update(self, trip_details):
         """
         Updates existing entry in database, based on entry id.
-        :param id: Integer
-        :param name: String
-        :param number: String
-        :param dept: String
-        :param rating: Integer
-        :param quarter: String
-        :param year: Integer
-        :param instructor: String
-        :param review: String
-        :return: none
-        :raises: Database errors on connection and insertion
+        :param trip_details: dictionary of trip title, date range, location, and entry id
         """
         pass
 

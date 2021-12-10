@@ -46,7 +46,7 @@ class model(Model):
     def insert(self, trip_details):
         """
         Enter new entity into Datastore under the specified KIND
-        :params: all fields with the associated course review.
+        :param trip_details: dictionary of trip title, date range, and location information
         """
         key = self.client.key(KIND)
         trip = datastore.Entity(key)
@@ -68,8 +68,8 @@ class model(Model):
 
     def update(self, trip_details):
         """
-        Update existing entity with user-entered information.
-        :params: all updated fields of a single course review to revise existing entity in Datastore
+        Updates existing entry in database, based on entry id.
+        :param trip_details: dictionary of trip title, date range, location, and entry id
         """
         key = self.client.key(KIND, int(trip_details['id']))
         trip = datastore.Entity(key)
@@ -89,6 +89,10 @@ class model(Model):
         return True
     
     def get_article_data(self, loc_data):
+        '''
+        Query NYT API endpoint for relevant articles from the Travel section archives
+        :param loc_data: city, state and country
+        '''
         nyt_url = f'{NYT_BASE_URL}&q={loc_data["city"]},{loc_data["state"]},{loc_data["country"]}&fq=section_name:("Travel") AND glocations.contains:("{loc_data["city"]}" "{loc_data["country"]}")'
         response = r.get(nyt_url)
         response = response.json()
@@ -112,6 +116,10 @@ class model(Model):
         return links
 
     def get_weather_data(self, loc_data):
+        '''
+        Query OpenWeather API for 7-day forecast.
+        :param loc_data: city, state and country
+        '''
         geocode_url = f'{WEATHER_BASE_URL}geo/1.0/direct?q={loc_data["city"]},{loc_data["country"]}&limit=5&appid={WEATHER_KEY}'
         loc_resp = r.get(geocode_url)
         loc_resp = loc_resp.json()
