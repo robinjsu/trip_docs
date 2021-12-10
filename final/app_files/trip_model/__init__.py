@@ -1,6 +1,5 @@
 model_backend = 'datastore'
 
-
 if model_backend == 'datastore':
     from .model_backend import model
 else:

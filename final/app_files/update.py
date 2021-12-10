@@ -9,7 +9,7 @@ MAP_API_KEY = os.environ.get('MAP_KEY')
 class Update(MethodView):
     def get(self):
         """
-        Retrieve a single review from previously submitted ones to allow user to update information
+        Retrieve a single document from previously submitted ones to allow user to update information
         Uses the query parameter in the url ('entry') to retrieve the correct entry using id.
         """
         id = request.args.get('id')
