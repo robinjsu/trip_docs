@@ -9,5 +9,5 @@ It includes the following features:
  - New York Times articles from the Travel section, that highlight possible things to do at the specified location.
  - A section to take notes on items of interest, scheduled itinerary, etc.
 
-This app was created to run on the Google Cloud Platform. It was deployed with Cloud Run. Newly created TripDocs are persistent documents, which are stored in a Datastore database. External APIs are accessed to provide weather, map, and travel articles to the user.
+This web application was created to run on the Google Cloud Platform. It was deployed with Cloud Run, which builds and runs this particular container image according to a Dockerfile.  Newly created TripDocs are persistent documents, which are stored in the Datastore database. External APIs are accessed to provide weather, map, and travel articles to the user (OpenWeather, Google Maps and NYT APIs, respectively).
 
